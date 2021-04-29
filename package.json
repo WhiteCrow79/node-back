@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "ejs": "^3.1.6",
-    "express": "^4.17.1"
+    "express": "^4.17.1"   
   },
   "devDependencies": {},
   "scripts": {
@@ -20,7 +20,7 @@
     "url": "git+https://github.com/WhiteCrow79/node-back.git"
   },
   "author": "whitecrow79",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/WhiteCrow79/node-back/issues"
   },
