@@ -15,7 +15,7 @@ function login() {
 
     fetch('/login', {
         method: "POST",
-        header: {
+        headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(req)
