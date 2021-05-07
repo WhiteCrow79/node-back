@@ -1,72 +1,31 @@
 'use strict';
 
-const fs = require('fs').promises; //promise설정
+const db = require('../config/db');
 
 class UserStorage {
-  static #getUserInfo(data, id) {
-    const users = JSON.parse(data);
-    const idx = users.id.indexOf(id);
-    const userKeys = Object.keys(users); // => [id, psword, name]
-    const userInfo = userKeys.reduce((newUser, info) => {
-      newUser[info] = users[info][idx];
-      return newUser;
-    }, {});
-
-    return userInfo;
-  }
-
-  static #getUsers(data, isAll, fields) {
-    const users = JSON.parse(data);
-    if (isAll) return users;
-
-    const newUsers = fields.reduce((newUsers, field) => {
-      if (users.hasOwnProperty(field)) {
-        newUsers[field] = users[field];
-      }
-      return newUsers;
-    }, {});
-    return newUsers;
-  }
-
-  static getUsers(isAll, ...fields) {
-    // const users = this.#users;
-    return fs
-      .readFile('./src/databases/users.json')
-      .then((data) => {
-        console.log(data.length);
-
-        return data.length > 0 ? this.#getUsers(data, isAll, fields) : {};
-      })
-      .catch(console.error);
-  }
-
+  
   static getUserInfo(id) {
-    // const users = this.#users;
-    return fs
-      .readFile('./src/databases/users.json')
-      .then((data) => {
-        return this.#getUserInfo(data, id);
-      })
-      .catch(console.error);
+    return new Promise((resolve, reject) => {
+      const query = 'select * from users where id = ?;';
+      db.query(query, [id], (err, data) => {
+        if (err) reject(`${err}`);
+        resolve(data[0]);
+      });
+    });
   }
 
   static async save(userInfo) {
-    const users = await this.getUsers(true);
-
-    if (users.hasOwnProperty('id') && users.id.includes(userInfo.id)) {
-      throw '이미 존재하는 아이디 입니다.';
-    }
-    if (!users.id) users.id = [];
-    users.id.push(userInfo.id);
-
-    if (!users.name) users.name = [];
-    users.name.push(userInfo.name);
-
-    if (!users.psword) users.psword = [];
-    users.psword.push(userInfo.psword);
-
-    fs.writeFile('./src/databases/users.json', JSON.stringify(users));
-    return { success: true };
+    return new Promise((resolve, reject) => {
+      const query = 'insert into user(id, name, psword) values(?, ?, ?);';
+      db.query(
+        query,
+        [userInfo.id, userInfo.name, userInfo.psword],
+        (err, data) => {
+          if (err) reject(`${err}`);
+          resolve({ success: true });
+        }
+      );
+    });
   }
 }
 
