@@ -58,9 +58,10 @@ const log = (response, url) => {
     );
   } else {
     logger.info(
-      `${url.method} ${url.path} ${url.status} Response: ${response.success} ${response.msg  || ''}`
+      `${url.method} ${url.path} ${url.status} Response: ${response.success} ${
+        response.msg || ''
+      }`
     );
     console.log(response);
-    return res.json(response);
   }
 };
