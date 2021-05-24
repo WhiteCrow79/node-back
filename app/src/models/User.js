@@ -2,6 +2,9 @@
 
 const UserStorage = require('./UserStorage');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 class User {
   constructor(body) {
     this.body = body;
@@ -9,13 +12,13 @@ class User {
 
   async login() {
     const client = this.body;
-    console.log(client.id);
 
     try {
       const user = await UserStorage.getUserInfo(client.id);
 
       if (user) {
-        if (user.id === client.id && user.psword === client.psword) {
+        const validPswd = await bcrypt.compare(client.psword, user.psword);
+        if (user.id === client.id && validPswd) {
           return { success: true };
         }
         return { success: false, msg: '비밀번호가 틀렸습니다.' };
@@ -28,6 +31,11 @@ class User {
 
   async register() {
     const client = this.body;
+
+    //pasword 암호화
+    const encPswd = await bcrypt.hash(this.body.psword, saltRounds);
+    client.psword = encPswd;
+
     try {
       const response = await UserStorage.save(client);
       return response;
