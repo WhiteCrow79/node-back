@@ -1,18 +1,18 @@
 'use strict';
 
-const id = document.querySelector('#id'),
-  psword = document.querySelector('#psword'),
+const userId = document.querySelector('#user-id'),
+  userPass = document.querySelector('#user-pass'),
   loginBtn = document.querySelector('#button');
 
 loginBtn.addEventListener('click', login);
 
 function login() {
-  if (!id.value) return alert('아이디를 입력해주십시오.');
-  if (!psword.value) return alert('비밀번호를 입력하여 주세요.');
-  
+  if (!userId.value) return alert('아이디를 입력해주십시오.');
+  if (!userPass.value) return alert('비밀번호를 입력하여 주세요.');
+
   const req = {
-    id: id.value,
-    psword: psword.value,
+    USER_ID: userId.value,
+    USER_PASS: userPass.value,
   };
   console.log(req);
 

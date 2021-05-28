@@ -3,10 +3,10 @@
 const db = require('../config/db');
 
 class UserStorage {
-  static getUserInfo(id) {
+  static getUserInfo(userId) {
     return new Promise((resolve, reject) => {
-      const query = 'select * from users where id = ?;';
-      db.query(query, [id], (err, data) => {
+      const query = `SELECT * FROM USER WHERE USER_ID = ?;`;
+      db.query(query, [userId], (err, data) => {
         if (err) reject(`${err}`);
         else resolve(data[0]);
       });
@@ -15,10 +15,36 @@ class UserStorage {
 
   static async save(userInfo) {
     return new Promise((resolve, reject) => {
-      const query = 'insert into users(id, name, psword) values(?, ?, ?);';
+      const query = `INSERT INTO USER (
+        USER_ID,
+        USER_NAME,
+        USER_PASS,
+        USER_TEL,
+        DEL_YN,
+        REG_DATE,
+        REG_USER_ID,
+        CHG_DATE,
+        CHG_USER_ID )
+      VALUES (
+        ?,
+        ?,
+        ?,
+        ?,
+        'N',
+        NOW(),
+        ?,
+        NOW(),
+        ? );`;
       db.query(
         query,
-        [userInfo.id, userInfo.name, userInfo.psword],
+        [
+          userInfo.USER_ID,
+          userInfo.USER_NAME,
+          userInfo.USER_PASS,
+          userInfo.USER_TEL,
+          userInfo.USER_ID,
+          userInfo.USER_ID,
+        ],
         (err, data) => {
           if (err) reject(`${err}`);
           else resolve({ success: true });

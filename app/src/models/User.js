@@ -14,11 +14,14 @@ class User {
     const client = this.body;
 
     try {
-      const user = await UserStorage.getUserInfo(client.id);
+      const user = await UserStorage.getUserInfo(client.USER_ID);
 
       if (user) {
-        const validPswd = await bcrypt.compare(client.psword, user.psword);
-        if (user.id === client.id && validPswd) {
+        const validPswd = await bcrypt.compare(
+          client.USER_PASS,
+          user.USER_PASS
+        );
+        if (user.USER_ID === client.USER_ID && validPswd) {
           return { success: true };
         }
         return { success: false, msg: '비밀번호가 틀렸습니다.' };
@@ -33,8 +36,8 @@ class User {
     const client = this.body;
 
     //pasword 암호화
-    const encPswd = await bcrypt.hash(this.body.psword, saltRounds);
-    client.psword = encPswd;
+    const encPswd = await bcrypt.hash(this.body.USER_PASS, saltRounds);
+    client.USER_PASS = encPswd;
 
     try {
       const response = await UserStorage.save(client);
