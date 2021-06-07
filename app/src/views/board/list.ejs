@@ -6,9 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="/js/board/list.js" defer></script>
+    <link rel="stylesheet" href="/css/home/login.css"></link>
     <title>Document</title>
   </head>
   <body>
-    list 화면
+    <table>
+      <tr>
+        <th>제목</th>
+        <th>내용</th>
+        <th>등록일자</th>
+      </tr>
+      <% for(let i in data) { %>
+      <tr data-bbrdseq=<%=data[i].BBRD_SEQ%>>
+        <td><%=data[i].TITLE%></td>
+        <td><%=data[i].CONTENTS%></td>
+        <td><%=data[i].REG_DATE%></td>
+      </tr>
+      <% } %>
+    </table>
+    <div>
+      <p id="write">등록</p>
+    </div>
   </body>
 </html>

@@ -12,6 +12,5 @@ router.get('/register', ctrl.output.register);
 router.post('/login', ctrl.process.login);
 router.post('/register', ctrl.process.register);
 
-
 //외부에서 사용
 module.exports = router;
