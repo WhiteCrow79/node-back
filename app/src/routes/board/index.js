@@ -12,4 +12,6 @@ router.get('/detail/:bbrdseq', ctrl.output.detail);
 router.post('/write', ctrl.process.write);
 router.post('/modify', ctrl.process.modify);
 
+router.delete('/delete/:bbrdseq', ctrl.process.delete);
+
 module.exports = router;

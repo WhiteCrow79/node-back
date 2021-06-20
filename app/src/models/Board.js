@@ -32,7 +32,6 @@ class Board {
   async detail(bbrdseq) {
     try {
       const response = await BoardStorage.detail(bbrdseq);
-      console.log(response);
       return response;
     } catch (err) {
       return { success: false, err };
@@ -44,6 +43,15 @@ class Board {
 
     try {
       const response = await BoardStorage.modify(client);
+      return response;
+    } catch (err) {
+      return { success: false, err };
+    }
+  }
+
+  async delete(bbrdseq) {
+    try {
+      const response = await BoardStorage.delete(bbrdseq);
       return response;
     } catch (err) {
       return { success: false, err };

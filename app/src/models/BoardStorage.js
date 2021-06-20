@@ -67,14 +67,24 @@ class BoardStorage {
           boardInfo.CONTENTS,
           boardInfo.BBRD_TYPE,
           boardInfo.BBRD_NT_YN,
-          boardInfo.BBRD_SEQ,
           'sessionId',
+          boardInfo.BBRD_SEQ,
         ],
         (err, data) => {
           if (err) reject(`${err}`);
           else resolve({ success: true });
         }
       );
+    });
+  }
+
+  static async delete(bbrdseq) {
+    return new Promise((resolve, reject) => {
+      const query = `DELETE FROM BBRD WHERE BBRD_SEQ = ?;`;
+      db.query(query, bbrdseq, (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve({ success: true });
+      });
     });
   }
 }

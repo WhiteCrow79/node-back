@@ -12,7 +12,7 @@
 <body>
   <div class="login-page">
     <div class="form">
-      <input id="bbrd-seq" type="hidden" value="<%=data[0].TITLE%>" />
+      <input id="bbrd-seq" type="hidden" value="<%=data[0].BBRD_SEQ%>" />
       <input id="title" type="text" placeholder="제목" value="<%=data[0].TITLE%>"/>
         <textarea id="contents" placeholder="내용"><%=data[0].CONTENTS%></textarea>
         <select id="bbrd-type">
@@ -22,6 +22,7 @@
         </select>
         <input id="bbrd-nt-yn" type="checkbox" value="Y" <%= data[0].BBRD_NT_YN === 'Y' ? 'checked' : '' %>>공지</input>
         <p id="button">수정</p>
+        <p id="delBtn">삭제</p>
       </div>
   </div>
 </body>

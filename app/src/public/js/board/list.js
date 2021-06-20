@@ -13,26 +13,19 @@ function write() {
 }
 
 function detail() {
-  let bbrdseq = this.parentNode.dataset.bbrdseq;
-
-  console.log(bbrdseq);
-
+  const bbrdseq = this.parentNode.dataset.bbrdseq;
   location.href = '/board/detail/' + bbrdseq;
 
-  // const req = {
-  //   BBRD_SEQ: bbrdseq,
-  // };
-  // fetch('/board/detail', {
-  //   method: 'POST',
+  // fetch('/board/detail/' + bbrdseq, {
+  //   method: 'GET',
   //   headers: {
   //     'Content-Type': 'application/json',
   //   },
-  //   body: JSON.stringify(req),
   // })
   //   .then((res) => res.json())
   //   .then((res) => {
-  //     if (res.success) {
-  //       res.render('board/list', { data: res });
+  //     if (res) {
+  //       console.log(res);
   //     } else {
   //       alert(res.msg);
   //     }

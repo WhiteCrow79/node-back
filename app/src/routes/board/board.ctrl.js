@@ -8,7 +8,6 @@ const output = {
     logger.info(`GET / 304 '게시판 화면으로 이동'`);
     const board = new Board(req.body);
     const response = await board.list();
-    console.log(response);
     const url = {
       method: 'GET',
       path: '/list',
@@ -32,9 +31,10 @@ const output = {
 
   detail: async (req, res) => {
     const bbrdseq = req.params.bbrdseq;
-    console.log(bbrdseq);
+    console.log('bbrdseq', bbrdseq);
     const board = new Board();
     const response = await board.detail(bbrdseq);
+
     const url = {
       method: 'GET',
       path: '/detail',
@@ -42,6 +42,7 @@ const output = {
     };
     log(response, url);
     res.render('board/detail', { data: response });
+    //return res.json(response);
   },
 };
 
@@ -66,6 +67,19 @@ const process = {
     const url = {
       method: 'POST',
       path: '/modify',
+      status: response.err ? 400 : 200,
+    };
+    log(response, url);
+    return res.json(response);
+  },
+
+  delete: async (req, res) => {
+    const bbrdseq = req.params.bbrdseq;
+    const board = new Board();
+    const response = await board.delete(bbrdseq);
+    const url = {
+      method: 'DELETE',
+      path: '/delete',
       status: response.err ? 400 : 200,
     };
     log(response, url);

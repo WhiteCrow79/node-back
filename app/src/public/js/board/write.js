@@ -28,7 +28,6 @@ function write() {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log(res);
       if (res.success) {
         alert('등록되었습니다.');
         location.href = '/board/list';
