@@ -26,7 +26,7 @@ function login() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        location.href = '/';
+        location.href = '/board/list';
       } else {
         alert(res.msg);
       }
