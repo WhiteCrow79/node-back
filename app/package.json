@@ -17,7 +17,8 @@
     "winston": "^3.3.3"
   },
   "scripts": {
-    "start": "nodemon ./bin/www.js",
+    "start": "pm2 start ./bin/www.js",
+    "stop": "pm2 kill",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
