@@ -14,10 +14,10 @@
     "express": "^4.17.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
+    "pm2": "^5.1.2",
     "winston": "^3.3.3"
   },
   "scripts": {
-    "dev": "nodemon ./bin/www.js",
     "start": "pm2 start ./bin/www.js",
     "stop": "pm2 kill",
     "test": "echo \"Error: no test specified\" && exit 1"
