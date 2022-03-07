@@ -18,8 +18,8 @@
     "winston": "^3.6.0"
   },
   "scripts": {
-    "start": "pm2 start ./bin/www.js",
-    "stop": "pm2 kill",
+    "start": "pm2 start ./bin/www.js --name 'whitecrownode'",
+    "stop": "pm2 stop whitecrownode",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
