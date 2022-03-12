@@ -9,11 +9,12 @@ const output = {
 
     console.log(req.session.userInfo);
 
-    if (req.session.userInfo) {
-      res.render('home/index', { userInfo: req.session.userInfo });
-    } else {
-      res.render('home/login');
-    }
+    // if (req.session.userInfo) {
+    //   res.render('home/main', { userInfo: req.session.userInfo });
+    // } else {
+    //   res.render('home/login');
+    // }
+    res.render('home/main', { userInfo: req.session.userInfo });
   },
 
   login: (req, res) => {
