@@ -21,8 +21,14 @@ class User {
           client.USER_PASS,
           user.USER_PASS
         );
+
         if (user.USER_ID === client.USER_ID && validPswd) {
-          return { success: true };
+          const result = {
+            success: true,
+            userId: user.USER_ID,
+            userName: user.USER_NAME,
+          };
+          return result;
         }
         return { success: false, msg: '비밀번호가 틀렸습니다.' };
       }

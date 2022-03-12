@@ -14,7 +14,6 @@ function login() {
     USER_ID: userId.value,
     USER_PASS: userPass.value,
   };
-  console.log(req);
 
   fetch('/login', {
     method: 'POST',
@@ -26,7 +25,7 @@ function login() {
     .then((res) => res.json())
     .then((res) => {
       if (res.success) {
-        location.href = '/board/list';
+        location.href = '/';
       } else {
         alert(res.msg);
       }

@@ -6,7 +6,14 @@ const User = require('../../models/User');
 const output = {
   home: (req, res) => {
     logger.info(`GET / 304 '홈 화면으로 이동'`);
-    res.render('home/index');
+
+    console.log(req.session.userInfo);
+
+    if (req.session.userInfo) {
+      res.render('home/index', { userInfo: req.session.userInfo });
+    } else {
+      res.render('home/login');
+    }
   },
 
   login: (req, res) => {
@@ -18,12 +25,27 @@ const output = {
     logger.info(`GET / 304 '회원가입 화면으로 이동'`);
     res.render('home/register');
   },
+
+  logout: (req, res) => {
+    logger.info(`GET / 304 '로그아웃 로그인 화면으로 이동'`);
+    // 세션삭제
+    req.session.destory();
+    res.redirect('/');
+  },
 };
 
 const process = {
   login: async (req, res) => {
     const user = new User(req.body);
     const response = await user.login();
+
+    if (response.success) {
+      req.session.userInfo = {
+        userId: response.userId,
+        userName: response.userName,
+      };
+    }
+
     const url = {
       method: 'POST',
       path: '/login',

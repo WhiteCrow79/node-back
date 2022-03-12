@@ -2,6 +2,7 @@
 
 // 모듈
 const express = require('express');
+// .env
 const dotenv = require('dotenv');
 //const morgan = require('morgan');
 //const fs = require('fs');
@@ -12,6 +13,16 @@ dotenv.config();
 // 라우팅
 const home = require('./src/routes/home');
 const board = require('./src/routes/board');
+
+// session
+const session = require('express-session');
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
 
 // 앱 세팅
 app.set('views', './src/views');
