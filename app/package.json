@@ -19,7 +19,7 @@
     "winston": "^3.6.0"
   },
   "scripts": {
-    "start": "pm2 start ./bin/www.js --name 'whitecrownode' --watch",
+    "start": "pm2 start ./bin/www.js --name 'whitecrownode'",
     "stop": "pm2 stop whitecrownode",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
