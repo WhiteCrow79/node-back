@@ -13,6 +13,7 @@ dotenv.config();
 // 라우팅
 const home = require('./src/routes/home');
 const board = require('./src/routes/board');
+const blood = require('./src/routes/blood');
 
 // session
 const session = require('express-session');
@@ -37,5 +38,6 @@ app.use(express.urlencoded({ extended: true }));
 // use -> 미들 웨어를 등록하는 메서드
 app.use('/', home);
 app.use('/board', board);
+app.use('/blood', blood);
 
 module.exports = app;

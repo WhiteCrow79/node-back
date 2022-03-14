@@ -13,11 +13,12 @@ a {
   text-decoration: none;
   color: var(--text-color);
 }
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #263343;
+  background-color: var(--background-color);
   padding: 8px 12px;
 }
 

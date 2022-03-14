@@ -1,0 +1,73 @@
+:root {
+  --text-color: #f0f4f5;
+  --background-color: #263343;
+  --accent-color: #d49466;
+}
+
+body {
+  background-color: var(--background-color);
+  margin: 0;
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+.blood_contents {
+  padding: 8% 0 0;
+  margin: auto;
+}
+
+.form {
+  position: relative;
+  z-index: 1;
+  background: #ffffff;
+  max-width: 360px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+}
+
+.form input,
+.form textarea,
+.form select {
+  outline: 0;
+  background: #f2f2f2;
+  width: 100%;
+  border: 0;
+  margin: 0 0 15px;
+  padding: 15px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.form #button {
+  text-transform: uppercase;
+  outline: 0;
+  background: var(--background-color);
+  width: 80%;
+  border: 0;
+  border-radius: 4px;
+  margin: 0 auto;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+}
+.form #button:active,
+.form #button:focus,
+.form #button:hover {
+  background-color: var(--accent-color);
+  border-radius: 4px;
+}
+
+.form .message {
+  margin: 15px 0 0;
+  color: #b3b3b3;
+  font-size: 12px;
+}
+
+/* .form .message a {
+  color: var(--accent-color);
+  text-decoration: none;
+} */
+
+@media screen and (max-width: 768px) {
+}
