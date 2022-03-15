@@ -14,24 +14,24 @@ class BloodStorage {
       }
 
       const query = `
-    INSERT INTO BLOOD_PRESSURE (
-        USER_ID, 
-        SYSTOLIC,
-        DIASTOLIC,
-        REG_DATE,
-        REG_USER_ID,
-        CHG_DATE,
-        CHG_USER_ID
-        )
-    VALUES (
-        ?,
-        ?,
-        ?,
-        NOW(),
-        ?,
-        NOW(),
-        ?
-        )`;
+        INSERT INTO BLOOD_PRESSURE (
+            USER_ID, 
+            SYSTOLIC,
+            DIASTOLIC,
+            REG_DATE,
+            REG_USER_ID,
+            CHG_DATE,
+            CHG_USER_ID
+            )
+        VALUES (
+            ?,
+            ?,
+            ?,
+            NOW(),
+            ?,
+            NOW(),
+            ?
+            )`;
       db.query(
         query,
         [
@@ -46,6 +46,33 @@ class BloodStorage {
           else resolve({ success: true });
         }
       );
+    });
+  }
+
+  static async lastInfo(bloodInfo) {
+    const sessionInfo = bloodInfo.USER_INFO;
+
+    return new Promise((resolve, reject) => {
+      //session 정보가 없다면 reject
+      if (!sessionInfo) {
+        reject('로그인 정보가 없습니다.');
+      }
+
+      const query = `
+        SELECT
+          SYSTOLIC,
+          DIASTOLIC
+        FROM
+          BLOOD_PRESSURE
+        WHERE
+          USER_ID = ?
+        ORDER BY
+          CHG_DATE DESC LIMIT 1;
+      `;
+      db.query(query, sessionInfo.userId, (err, data) => {
+        if (err) reject(`${err}`);
+        else resolve(data);
+      });
     });
   }
 }

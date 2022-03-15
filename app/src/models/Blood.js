@@ -20,6 +20,20 @@ class Blood {
       };
     }
   }
+
+  //마지막 등록 혈압정보
+  async lastInfo() {
+    const client = this.body;
+    try {
+      const response = await BloodStorage.lastInfo(client);
+      return response;
+    } catch (err) {
+      return {
+        success: false,
+        err,
+      };
+    }
+  }
 }
 
 module.exports = Blood;
