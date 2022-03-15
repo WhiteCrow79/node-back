@@ -12,6 +12,7 @@ class Board {
 
     try {
       const response = await BoardStorage.getBoardList();
+      console.log('response:::', response);
       return response;
     } catch (err) {
       return { success: false, err };
